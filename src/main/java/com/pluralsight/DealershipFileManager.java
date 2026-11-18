@@ -33,7 +33,7 @@ public class DealershipFileManager {
                 BigDecimal price = new BigDecimal(parts[7]);
 
                 Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
-                dealership.addVehicle(String.valueOf(vehicle));
+                dealership.addVehicle((vehicle));
 
             }
 
