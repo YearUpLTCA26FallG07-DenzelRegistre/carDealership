@@ -1,8 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 
 public class DealershipFileManager {
@@ -47,7 +45,20 @@ public class DealershipFileManager {
 
 
     public void saveDealership(Dealership dealership){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(inventory))) {
+            writer.write(dealership.getName() + "|" + dealership.getAddress() + "|" + dealership.getPhone());
+            writer.newLine();
 
+            for (Vehicle v : dealership.getAllVehicles()) {
+                writer.write(v.getVin() + "|" + v.getYear() + "|" + v.getMake() + "|"
+                        + v.getModel() + "|" + v.getVehicleType() + "|" + v.getColor() + "|"
+                        + v.getOdometer() + "|" + v.getPrice());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving " + inventory + ": " + e.getMessage());
+        }
     }
+
 
 }
